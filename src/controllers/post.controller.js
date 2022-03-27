@@ -3,6 +3,7 @@ const express = require("express")
 
 const router = express.Router();
 const authenticate = require("../middlewares/authenticate");
+const authorise = require("../middlewares/authorise") 
 const Post = require("../models/post.model");
 
 router.post("", authenticate, async (req, res) => {
@@ -19,7 +20,7 @@ router.post("", authenticate, async (req, res) => {
 })
 
 
-router.patch("/:id", authenticate, async (req, res) => {
+router.patch("/:id", authenticate, authorise(["admin","seller"]), async (req, res) => {
 
     req.body.user_id = req.userID;
     try{
