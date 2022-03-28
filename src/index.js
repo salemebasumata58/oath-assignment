@@ -8,16 +8,10 @@ const app = express();
 
 app.use(express.json());
 
-
-
 app.use("/users", userController)
-
 app.use("/post", postController)
-
 app.post("/register", register)
-
 app.post("/login", login);
-
 
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -31,8 +25,5 @@ app.get(
     return res.status(200).send({user:req.user, token})
   }
 )
-
-
-
 module.exports = app;
 
